@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { StatusBar } from "expo-status-bar";
+import Constants from 'expo-constants';
 import {
   ActivityIndicator,
   FlatList,
@@ -6,9 +8,9 @@ import {
   Text,
   View,
 } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 export default class App extends Component {
+  
   constructor(props) {
     super(props);
 
@@ -38,7 +40,7 @@ export default class App extends Component {
     const { data, isLoading } = this.state;
 
     return (
-      <View style={{ flex: 1, padding: 24 }}>
+      <View style={styles.container}>
         {isLoading ? (
           <ActivityIndicator />
         ) : (
@@ -47,12 +49,22 @@ export default class App extends Component {
             keyExtractor={({ id }) => id}
             renderItem={({ item }) => (
               <Text>
-                {item.name}, {item.description},{item.price+'¥'}
+                {item.name}, {item.description},{item.price}
               </Text>
             )}
           />
         )}
+        <StatusBar style="auto" />
       </View>
     );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding:24,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
